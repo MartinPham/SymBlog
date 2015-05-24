@@ -4,6 +4,8 @@
 namespace Blogger\BlogBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 // Import new namespaces
 use Blogger\BlogBundle\Entity\Enquiry;
@@ -13,6 +15,10 @@ use Symfony\Component\HttpFoundation\Request;
 
 class PageController extends Controller
 {
+    /**
+     * @Route("/", name="BloggerBlogBundle_homepage")
+     * @Method({"GET"})
+     */
     public function indexAction()
     {
         $em = $this->getDoctrine()
@@ -26,13 +32,20 @@ class PageController extends Controller
         ));
     }
 
-
+    /**
+     * @Route("/about", name="BloggerBlogBundle_about")
+     * @Method({"GET"})
+     */
     public function aboutAction()
     {
         return $this->render('BloggerBlogBundle:Page:about.html.twig');
     }
 
 
+    /**
+     * @Route("/contact", name="BloggerBlogBundle_contact")
+     * @Method({"GET", "POST"})
+     */
     public function contactAction(Request $request)
     {
         $enquiry = new Enquiry();

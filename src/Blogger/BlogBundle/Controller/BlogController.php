@@ -3,6 +3,9 @@
 
 namespace Blogger\BlogBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
@@ -11,7 +14,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class BlogController extends Controller
 {
     /**
-     * Show a blog entry
+     * @Route("/{id}/{slug}", name="BloggerBlogBundle_blog_show", requirements={"id" = "\d+"})
+     * @Method({"GET"})
      */
     public function showAction($id, $slug)
     {
