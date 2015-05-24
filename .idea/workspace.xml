@@ -129,7 +129,6 @@
   </component>
   <component name="FrameworkCommandLineHistory">
     <commandsHistory>
-      <command text="php app/console doctrine:migrations:migrate" />
       <command text="php app/console doctrine:generate:entities Blogger\BlogBundle" />
       <command text="php app/console doctrine:migrations:diff" />
       <command text="php app/console doctrine:migrations:migrate" />
@@ -154,6 +153,7 @@
       <command text="php app/console cache:clear" />
       <command text="phpunit -c app" />
       <command text="phpunit --coverage-html ./phpunit-report -c app/" />
+      <command text="php app/console cache:clear --env=prod" />
     </commandsHistory>
   </component>
   <component name="HighlightingSettingsPerFile">
