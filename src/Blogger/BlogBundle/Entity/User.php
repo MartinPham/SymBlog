@@ -2,13 +2,13 @@
 namespace Blogger\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
 /**
- * @ORM\Table(name="app_users")
- * @ORM\Entity(repositoryClass="Blogger\BlogBundle\Entity\UserRepository")
+ * @ORM\Table(name="users")
+ * @ORM\Entity(repositoryClass="Blogger\BlogBundle\Entity\Repository\UserRepository")
  */
-class User implements UserInterface, \Serializable
+class User implements AdvancedUserInterface, \Serializable
 {
     /**
      * @ORM\Column(type="integer")
@@ -37,6 +37,11 @@ class User implements UserInterface, \Serializable
      */
     private $isActive;
 
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $roles;
+
     public function __construct()
     {
         $this->isActive = true;
@@ -63,7 +68,12 @@ class User implements UserInterface, \Serializable
 
     public function getRoles()
     {
-        return array('ROLE_USER');
+        return explode(',', $this->roles);
+    }
+
+    public function setRoles($roles)
+    {
+        $this->roles = implode(',', $roles);
     }
 
     public function eraseCredentials()
@@ -77,6 +87,7 @@ class User implements UserInterface, \Serializable
             $this->id,
             $this->username,
             $this->password,
+            $this->isActive,
             // see section on salt below
             // $this->salt,
         ));
@@ -89,6 +100,7 @@ class User implements UserInterface, \Serializable
             $this->id,
             $this->username,
             $this->password,
+            $this->isActive,
             // see section on salt below
             // $this->salt
             ) = unserialize($serialized);
@@ -172,6 +184,26 @@ class User implements UserInterface, \Serializable
      * @return boolean 
      */
     public function getIsActive()
+    {
+        return $this->isActive;
+    }
+
+    public function isAccountNonExpired()
+    {
+        return true;
+    }
+
+    public function isAccountNonLocked()
+    {
+        return true;
+    }
+
+    public function isCredentialsNonExpired()
+    {
+        return true;
+    }
+
+    public function isEnabled()
     {
         return $this->isActive;
     }
