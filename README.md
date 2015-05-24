@@ -1,4 +1,11 @@
-symfony.dev
-===========
+Entity
 
-A Symfony project created on May 21, 2015, 10:03 am.
+php app/console doctrine:generate:entities <Path>
+
+Migrate
+
+php app/console doctrine:migrations:diff
+
+php app/console doctrine:migrations:migrate
+
+

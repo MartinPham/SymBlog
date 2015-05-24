@@ -4,7 +4,7 @@ BloggerBlogBundle_annotation:
     resource: "@BloggerBlogBundle/Controller"
     type:     annotation
 
-    
+
 #BloggerBlogBundle_admin:
 #    pattern:  /admin
 #    defaults: { _controller: BloggerBlogBundle:Admin:index }
